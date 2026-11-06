@@ -1,6 +1,6 @@
 import React from 'react';
 import { useApp } from '../context/AppContext';
-import { ShieldCheck, Scale, FileText, Info, Mail } from 'lucide-react';
+import { ShieldCheck, Shield, Scale, FileText, Info, Mail } from 'lucide-react';
 
 export default function Footer() {
   const { setCurrentView } = useApp();

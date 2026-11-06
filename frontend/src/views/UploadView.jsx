@@ -5,6 +5,7 @@ import {
   ArrowRight, RefreshCw, Hash, ShieldCheck, Filter, Table
 } from 'lucide-react';
 import Papa from 'papaparse';
+import * as XLSX from 'xlsx';
 
 export default function UploadView() {
   const { setRecords, setEvidence, setSummary, addNotification, setCurrentView, loadDemoData, loading } = useApp();
@@ -71,30 +72,56 @@ export default function UploadView() {
       }
     } catch (err) {
       console.warn("Backend API upload error, falling back to local client parse:", err);
-      // Client-side fallback using PapaParse
-      Papa.parse(file, {
-        header: true,
-        dynamicTyping: true,
-        skipEmptyLines: true,
-        complete: (results) => {
+      // Client-side fallback using PapaParse or SheetJS for Excel
+      if (file.name.endsWith('.xlsx') || file.name.endsWith('.xls')) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const data = new Uint8Array(e.target.result);
+          const workbook = XLSX.read(data, { type: 'array' });
+          const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+          const json = XLSX.utils.sheet_to_json(firstSheet);
           setUploadProgress(100);
-          const raw = results.data.slice(0, 10);
-          setParsedPreview(raw);
+          setParsedPreview(json.slice(0, 10));
           setValidationReport({
-            total_rows: results.data.length,
-            processed_records: results.data.length,
+            total_rows: json.length,
+            processed_records: json.length,
             duplicates_detected: 0,
             missing_or_unknown_numbers: 0,
             data_quality_score: 98
           });
-          setRecords(results.data.map((r, i) => ({
+          setRecords(json.map((r, i) => ({
             ...r,
             record_id: r.record_id || `REC-${i+10001}`,
             duration: Number(r.duration || 0)
           })));
-          addNotification(`Parsed ${results.data.length} records locally.`);
-        }
-      });
+          addNotification(`Parsed ${json.length} records from Excel spreadsheet.`);
+        };
+        reader.readAsArrayBuffer(file);
+      } else {
+        Papa.parse(file, {
+          header: true,
+          dynamicTyping: true,
+          skipEmptyLines: true,
+          complete: (results) => {
+            setUploadProgress(100);
+            const raw = results.data.slice(0, 10);
+            setParsedPreview(raw);
+            setValidationReport({
+              total_rows: results.data.length,
+              processed_records: results.data.length,
+              duplicates_detected: 0,
+              missing_or_unknown_numbers: 0,
+              data_quality_score: 98
+            });
+            setRecords(results.data.map((r, i) => ({
+              ...r,
+              record_id: r.record_id || `REC-${i+10001}`,
+              duration: Number(r.duration || 0)
+            })));
+            addNotification(`Parsed ${results.data.length} records locally.`);
+          }
+        });
+      }
     }
   };
 
