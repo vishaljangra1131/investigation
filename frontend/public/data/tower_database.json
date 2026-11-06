@@ -1,0 +1,142 @@
+[
+  {
+    "tower_id": "DEL-CP-01",
+    "name": "Connaught Place Inner Circle",
+    "lac": "1201",
+    "cell_id": "404-45-1201-1001",
+    "lat": 28.6315,
+    "lon": 77.2167,
+    "operator": "Airtel",
+    "azimuth": 60
+  },
+  {
+    "tower_id": "DEL-CP-02",
+    "name": "Connaught Place Barakhamba",
+    "lac": "1201",
+    "cell_id": "404-45-1201-1002",
+    "lat": 28.629,
+    "lon": 77.228,
+    "operator": "Airtel",
+    "azimuth": 180
+  },
+  {
+    "tower_id": "DEL-NP-01",
+    "name": "Nehru Place Commercial Complex",
+    "lac": "1202",
+    "cell_id": "404-45-1202-2001",
+    "lat": 28.5494,
+    "lon": 77.253,
+    "operator": "Jio",
+    "azimuth": 0
+  },
+  {
+    "tower_id": "DEL-NP-02",
+    "name": "Nehru Place Outer Ring Rd",
+    "lac": "1202",
+    "cell_id": "404-45-1202-2002",
+    "lat": 28.545,
+    "lon": 77.258,
+    "operator": "Jio",
+    "azimuth": 120
+  },
+  {
+    "tower_id": "DEL-ROH-01",
+    "name": "Rohini Sector 7 Hub",
+    "lac": "1203",
+    "cell_id": "404-45-1203-3001",
+    "lat": 28.7041,
+    "lon": 77.1025,
+    "operator": "Vi",
+    "azimuth": 90
+  },
+  {
+    "tower_id": "DEL-ROH-02",
+    "name": "Rohini Sector 14 Metro",
+    "lac": "1203",
+    "cell_id": "404-45-1203-3002",
+    "lat": 28.718,
+    "lon": 77.121,
+    "operator": "Vi",
+    "azimuth": 270
+  },
+  {
+    "tower_id": "DEL-GUR-01",
+    "name": "Gurugram CyberHub Phase 2",
+    "lac": "1204",
+    "cell_id": "404-45-1204-4001",
+    "lat": 28.4986,
+    "lon": 77.0892,
+    "operator": "Airtel",
+    "azimuth": 45
+  },
+  {
+    "tower_id": "DEL-GUR-02",
+    "name": "Gurugram Golf Course Rd",
+    "lac": "1204",
+    "cell_id": "404-45-1204-4002",
+    "lat": 28.465,
+    "lon": 77.105,
+    "operator": "Airtel",
+    "azimuth": 180
+  },
+  {
+    "tower_id": "DEL-NOI-01",
+    "name": "Noida Sector 62 Tech Park",
+    "lac": "1205",
+    "cell_id": "404-45-1205-5001",
+    "lat": 28.628,
+    "lon": 77.3649,
+    "operator": "Jio",
+    "azimuth": 300
+  },
+  {
+    "tower_id": "DEL-NOI-02",
+    "name": "Noida Sector 18 Market",
+    "lac": "1205",
+    "cell_id": "404-45-1205-5002",
+    "lat": 28.57,
+    "lon": 77.32,
+    "operator": "Jio",
+    "azimuth": 150
+  },
+  {
+    "tower_id": "DEL-AERO-01",
+    "name": "IGI Airport Terminal 3",
+    "lac": "1206",
+    "cell_id": "404-45-1206-6001",
+    "lat": 28.5562,
+    "lon": 77.0863,
+    "operator": "Vi",
+    "azimuth": 0
+  },
+  {
+    "tower_id": "DEL-KB-01",
+    "name": "Karol Bagh Market",
+    "lac": "1207",
+    "cell_id": "404-45-1207-7001",
+    "lat": 28.6517,
+    "lon": 77.1906,
+    "operator": "Airtel",
+    "azimuth": 90
+  },
+  {
+    "tower_id": "DEL-DWK-01",
+    "name": "Dwarka Sector 21",
+    "lac": "1208",
+    "cell_id": "404-45-1208-8001",
+    "lat": 28.552,
+    "lon": 77.058,
+    "operator": "Jio",
+    "azimuth": 240
+  },
+  {
+    "tower_id": "DEL-LKP-01",
+    "name": "Lajpat Nagar Central Market",
+    "lac": "1209",
+    "cell_id": "404-45-1209-9001",
+    "lat": 28.568,
+    "lon": 77.243,
+    "operator": "Airtel",
+    "azimuth": 180
+  }
+]
