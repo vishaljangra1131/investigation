@@ -16,7 +16,8 @@ export default function CdrComparisonView() {
     setLoading(true);
     try {
       const res = await fetch('/api/analytics/compare');
-      if (res.ok) {
+      const isJson = res.headers.get('content-type')?.includes('application/json');
+      if (res.ok && isJson) {
         const data = await res.json();
         setComparison(data);
       } else {

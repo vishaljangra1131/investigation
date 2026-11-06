@@ -11,7 +11,11 @@ export default function IpdrAnalysisView() {
 
   useEffect(() => {
     fetch('/api/ipdr')
-      .then(res => res.json())
+      .then(res => {
+        const isJson = res.headers.get('content-type')?.includes('application/json');
+        if (!res.ok || !isJson) throw new Error("Backend offline");
+        return res.json();
+      })
       .then(data => {
         setIpdrData(data.records || []);
         setTotalMB(data.total_data_mb || 0);
@@ -24,8 +28,9 @@ export default function IpdrAnalysisView() {
           .then(data => {
             setIpdrData(data);
             const mb = data.reduce((acc, r) => acc + (r.total_megabytes || 0), 0);
-            setTotalMB(round(mb, 2));
-          });
+            setTotalMB(Number(mb.toFixed(2)));
+          })
+          .catch(e => console.error("Could not load IPDR fallback:", e));
       });
   }, []);
 

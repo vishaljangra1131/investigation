@@ -56,23 +56,24 @@ export const AppProvider = ({ children }) => {
     setLoading(true);
     try {
       const res = await fetch('/api/health');
-      if (res.ok) {
+      const isJson = res.headers.get('content-type')?.includes('application/json');
+      if (res.ok && isJson) {
         setApiOnline(true);
         // Load summary
         const sumRes = await fetch('/api/analytics/summary');
-        if (sumRes.ok) {
+        if (sumRes.ok && sumRes.headers.get('content-type')?.includes('application/json')) {
           const sumData = await sumRes.json();
           setSummary(sumData);
         }
         // Load records
         const recRes = await fetch('/api/records?limit=500');
-        if (recRes.ok) {
+        if (recRes.ok && recRes.headers.get('content-type')?.includes('application/json')) {
           const recData = await recRes.json();
           setRecords(recData.records);
         }
         // Load anomalies
         const anoRes = await fetch('/api/analytics/anomalies');
-        if (anoRes.ok) {
+        if (anoRes.ok && anoRes.headers.get('content-type')?.includes('application/json')) {
           const anoData = await anoRes.json();
           setAnomalies(anoData);
         }
@@ -90,8 +91,14 @@ export const AppProvider = ({ children }) => {
 
   const loadLocalFallbackData = () => {
     fetch('/data/sample_cdr_case_01.csv')
-      .then(res => res.text())
+      .then(res => {
+        if (!res.ok) throw new Error("Fallback fetch failed");
+        return res.text();
+      })
       .then(csvText => {
+        if (!csvText || csvText.trim().startsWith('<')) {
+          throw new Error("Received HTML instead of CSV");
+        }
         Papa.parse(csvText, {
           header: true,
           dynamicTyping: true,
@@ -170,7 +177,8 @@ export const AppProvider = ({ children }) => {
     setLoading(true);
     try {
       const res = await fetch(`/api/demo/load?dataset=${dataset}`);
-      if (res.ok) {
+      const isJson = res.headers.get('content-type')?.includes('application/json');
+      if (res.ok && isJson) {
         const data = await res.json();
         setEvidence(data.evidence);
         await fetchInitialData();
@@ -182,8 +190,12 @@ export const AppProvider = ({ children }) => {
       console.warn("Using local fallback loader:", err);
       const filename = dataset === "case_1" ? "/data/sample_cdr_case_01.csv" : "/data/sample_cdr_case_02.csv";
       fetch(filename)
-        .then(r => r.text())
+        .then(r => {
+          if (!r.ok) throw new Error("File not found");
+          return r.text();
+        })
         .then(csv => {
+          if (!csv || csv.trim().startsWith('<')) throw new Error("Received HTML");
           Papa.parse(csv, {
             header: true,
             skipEmptyLines: true,
@@ -194,7 +206,8 @@ export const AppProvider = ({ children }) => {
               addNotification(`Loaded local demo dataset (${dataset.toUpperCase()}).`);
             }
           });
-        });
+        })
+        .catch(e => console.error("Demo load failed:", e));
     } finally {
       setLoading(false);
     }

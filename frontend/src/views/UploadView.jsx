@@ -56,7 +56,8 @@ export default function UploadView() {
         body: formData
       });
 
-      if (res.ok) {
+      const isJson = res.headers.get('content-type')?.includes('application/json');
+      if (res.ok && isJson) {
         const data = await res.json();
         setUploadProgress(100);
         setEvidence(data.evidence);
