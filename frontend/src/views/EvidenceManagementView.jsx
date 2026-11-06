@@ -99,7 +99,7 @@ export default function EvidenceManagementView() {
 
         <div className="space-y-3 font-mono text-xs">
           {(evidence?.custody_log || [
-            { timestamp: "2026-10-22 10:35:00", action: "INITIAL_INGESTION", officer: "Insp. Rajesh Verma", hash: "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855" },
+            { timestamp: "2026-10-22 10:35:00", action: "INITIAL_INGESTION", officer: "Constable Vishal", hash: "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855" },
             { timestamp: "2026-10-24 16:40:00", action: "INTEGRITY_VERIFICATION", officer: "Sub-Insp. Priya Sharma", hash: "MATCH_CONFIRMED" }
           ]).map((entry, idx) => (
             <div key={idx} className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 space-y-1">

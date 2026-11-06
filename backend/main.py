@@ -42,14 +42,14 @@ SESSION_DATA = {
     "case": {
         "case_id": "FIR-DEL-2026-8812",
         "case_title": "Operation CyberTrack: Telecom Intelligence Review",
-        "officer_name": "Insp. Rajesh Verma",
+        "officer_name": "Constable Vishal",
         "agency": "Special Cyber Crime & Telecom Intelligence Division",
         "description": "Analysis of subscriber communications and mobile handset transitions in connection with suspected coordinated extortion & hawala operations.",
         "created_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "status": "ACTIVE",
         "target_numbers": ["+919876543210", "+919811223344"],
         "notes": [
-            {"date": "2026-10-22", "author": "Insp. Rajesh Verma", "text": "Subpoenaed CDR and IPDR logs received lawfully from cellular operators under Sec 91 CrPC / BNSS."},
+            {"date": "2026-10-22", "author": "Constable Vishal", "text": "Subpoenaed CDR and IPDR logs received lawfully from cellular operators under Sec 91 CrPC / BNSS."},
             {"date": "2026-10-24", "author": "Sub-Insp. Priya Sharma", "text": "Cryptographic SHA-256 integrity hash calculated and verified against raw disk image."}
         ]
     },
@@ -77,11 +77,11 @@ def startup_event():
             "file_size_bytes": len(content),
             "sha256_hash": sha,
             "uploaded_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "analyst_name": "Insp. Rajesh Verma",
+            "analyst_name": "Constable Vishal",
             "record_count": len(records),
             "verified": True,
             "custody_log": [
-                {"timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"), "action": "INITIAL_INGESTION", "officer": "Insp. Rajesh Verma", "hash": sha}
+                {"timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"), "action": "INITIAL_INGESTION", "officer": "Constable Vishal", "hash": sha}
             ]
         }
         print(f"Loaded {len(records)} initial demo records.")

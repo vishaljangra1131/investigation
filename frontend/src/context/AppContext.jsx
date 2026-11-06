@@ -11,14 +11,14 @@ export const AppProvider = ({ children }) => {
   const [caseData, setCaseData] = useState({
     case_id: "FIR-DEL-2026-8812",
     case_title: "Operation CyberTrack: Telecom Intelligence Review",
-    officer_name: "Insp. Rajesh Verma",
+    officer_name: "Constable Vishal",
     agency: "Special Cyber Crime & Telecom Intelligence Division",
     description: "Analysis of subscriber communications and mobile handset transitions in connection with suspected coordinated extortion & hawala operations.",
     created_at: "2026-10-22 10:30:00",
     status: "ACTIVE",
     target_numbers: ["+919876543210", "+919811223344"],
     notes: [
-      { date: "2026-10-22 11:15", author: "Insp. Rajesh Verma", text: "Subpoenaed CDR and IPDR logs received lawfully from cellular operators under Sec 91 CrPC / Sec 94 BNSS." },
+      { date: "2026-10-22 11:15", author: "Constable Vishal", text: "Subpoenaed CDR and IPDR logs received lawfully from cellular operators under Sec 91 CrPC / Sec 94 BNSS." },
       { date: "2026-10-24 16:40", author: "Sub-Insp. Priya Sharma", text: "Cryptographic SHA-256 integrity hash calculated and verified against raw disk image." }
     ]
   });
@@ -29,11 +29,11 @@ export const AppProvider = ({ children }) => {
     file_size_bytes: 42350,
     sha256_hash: "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
     uploaded_at: "2026-10-22 10:35:00",
-    analyst_name: "Insp. Rajesh Verma",
+    analyst_name: "Constable Vishal",
     record_count: 196,
     verified: true,
     custody_log: [
-      { timestamp: "2026-10-22 10:35:00", action: "INITIAL_INGESTION", officer: "Insp. Rajesh Verma", hash: "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855" }
+      { timestamp: "2026-10-22 10:35:00", action: "INITIAL_INGESTION", officer: "Constable Vishal", hash: "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855" }
     ]
   });
   const [anomalies, setAnomalies] = useState([]);

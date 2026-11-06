@@ -222,7 +222,7 @@ export default function DashboardView() {
             </div>
             <div className="flex items-center justify-between pt-1 text-[10px] text-slate-400">
               <span>Ingested: {evidence?.uploaded_at || '2026-10-22 10:35'}</span>
-              <span>Officer: {evidence?.analyst_name || 'Insp. Rajesh Verma'}</span>
+              <span>Officer: {evidence?.analyst_name || 'Constable Vishal'}</span>
             </div>
           </div>
 
