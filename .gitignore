@@ -1,0 +1,56 @@
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Production build outputs
+dist/
+dist-ssr/
+build/
+*/dist/
+
+# Python cache & environments
+__pycache__/
+*/__pycache__/
+*/**/__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Logs & Debug
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local Environment Variables & Secrets
+.env
+.env.local
+.env.*.local
+*.local
+
+# IDE & Editor files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+Thumbs.db
