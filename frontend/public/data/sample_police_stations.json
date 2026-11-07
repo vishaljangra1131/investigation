@@ -1,0 +1,57 @@
+[
+  {
+    "id": "PS-DEL-01",
+    "state": "Delhi",
+    "district": "New Delhi",
+    "police_station": "Connaught Place Police Station",
+    "sho_name": "Insp. Satish Kumar",
+    "contact": "+91-11-23340004",
+    "email": "sho-connaughtplace-dl@nic.in",
+    "address": "B-Block, Near Regal Cinema, Connaught Place, New Delhi 110001",
+    "special_units": ["Cyber Desk", "Anti-Snatching Squad"]
+  },
+  {
+    "id": "PS-DEL-02",
+    "state": "Delhi",
+    "district": "South East Delhi",
+    "police_station": "Cyber Police Station South East",
+    "sho_name": "ACP (Cyber) Devendra Negi",
+    "contact": "+91-11-26922201",
+    "email": "cyberps-se-dl@nic.in",
+    "address": "Sarita Vihar, Mathura Road, New Delhi 110076",
+    "special_units": ["Financial Fraud Wing", "Telecom Forensics Lab"]
+  },
+  {
+    "id": "PS-DEL-03",
+    "state": "Delhi",
+    "district": "South West Delhi",
+    "police_station": "Special Cell Cyber Crime Unit (IFSO)",
+    "sho_name": "DCP Hemant Tiwari",
+    "contact": "+91-11-20892622",
+    "email": "ifso-cell@delhipolice.gov.in",
+    "address": "Sector 16C, Dwarka, New Delhi 110078",
+    "special_units": ["National Cyber Fraud Analysis", "Malware Analysis", "Darknet Monitoring"]
+  },
+  {
+    "id": "PS-HAR-01",
+    "state": "Haryana",
+    "district": "Gurugram",
+    "police_station": "Cyber Crime Police Station Gurugram (East)",
+    "sho_name": "Insp. Jasvir Singh",
+    "contact": "+91-124-2221550",
+    "email": "sho-cyber-ggn@hry.gov.in",
+    "address": "Sector 43, DLF Phase 5, Gurugram, Haryana 122002",
+    "special_units": ["Crypto Forensics", "Call Center Fraud Buster"]
+  },
+  {
+    "id": "PS-UP-01",
+    "state": "Uttar Pradesh",
+    "district": "Gautam Buddha Nagar (Noida)",
+    "police_station": "Cyber Police Station Sector 36 Noida",
+    "sho_name": "Insp. Rita Yadav",
+    "contact": "+91-120-2501004",
+    "email": "sho-cyber-noida@up.gov.in",
+    "address": "A-Block, Sector 36, Noida, Uttar Pradesh 201301",
+    "special_units": ["SIM Box Detection", "Layer 2 Mule Recovery"]
+  }
+]

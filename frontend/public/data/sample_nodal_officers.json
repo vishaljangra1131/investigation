@@ -1,0 +1,93 @@
+[
+  {
+    "id": "NOD-01",
+    "category": "Telecom",
+    "organization": "Bharti Airtel Ltd",
+    "jurisdiction": "Delhi & NCR Circle",
+    "name": "Sanjeev Verma",
+    "designation": "Chief Nodal Officer - Law Enforcement Support",
+    "email": "nodal.delhi@airtel.com",
+    "phone": "+91-11-41668899",
+    "mobile": "+91-9810012345",
+    "address": "Airtel Centre, Plot 16, Udyog Vihar Phase IV, Gurugram",
+    "escalation_level": "Level 1 (Subpoena / Sec 91 CrPC)"
+  },
+  {
+    "id": "NOD-02",
+    "category": "Telecom",
+    "organization": "Reliance Jio Infocomm Ltd",
+    "jurisdiction": "Delhi & Haryana LSA",
+    "name": "Manish Tyagi",
+    "designation": "General Manager - Regulatory & LEA Liaison",
+    "email": "lea.delhi@ril.com",
+    "phone": "+91-11-66778899",
+    "mobile": "+91-9877011223",
+    "address": "Reliance Corporate IT Park, Ghansoli, Navi Mumbai / Barakhamba Road Delhi",
+    "escalation_level": "Level 1 (CDR / IPDR / Tower Dump)"
+  },
+  {
+    "id": "NOD-03",
+    "category": "Telecom",
+    "organization": "Vodafone Idea Ltd (Vi)",
+    "jurisdiction": "Delhi & Western UP",
+    "name": "Pradeep Rawat",
+    "designation": "Nodal Officer - Law Enforcement Agency Relations",
+    "email": "nodalofficer.delhi@vodafoneidea.com",
+    "phone": "+91-11-45678901",
+    "mobile": "+91-9820098765",
+    "address": "Vi Tower, Sector 32, Gurugram, Haryana",
+    "escalation_level": "Level 1 (LBS / Subscriber CAF)"
+  },
+  {
+    "id": "NOD-04",
+    "category": "Banking",
+    "organization": "State Bank of India (SBI)",
+    "jurisdiction": "National / Cyber Fraud Response",
+    "name": "Col. Ashwini Kumar (Retd.)",
+    "designation": "Chief Information Security & LEA Nodal Officer",
+    "email": "nodal.cyber@sbi.co.in",
+    "phone": "+91-22-22740000",
+    "mobile": "+91-9821034567",
+    "address": "SBI Corporate Centre, Madame Cama Road, Nariman Point, Mumbai",
+    "escalation_level": "Level 1 (Account Freeze / Notice Sec 91 & 102 CrPC)"
+  },
+  {
+    "id": "NOD-05",
+    "category": "Banking",
+    "organization": "HDFC Bank Ltd",
+    "jurisdiction": "All India LEA Coordination",
+    "name": "Rajiv Mehra",
+    "designation": "Executive Vice President - Financial Crime & LEA Desk",
+    "email": "lea.desk@hdfcbank.com",
+    "phone": "+91-22-66521000",
+    "mobile": "+91-9833012345",
+    "address": "HDFC Bank House, Senapati Bapat Marg, Lower Parel, Mumbai",
+    "escalation_level": "Level 1 (Transaction Logs / Lien Mark / CCTV)"
+  },
+  {
+    "id": "NOD-06",
+    "category": "Payment Gateway",
+    "organization": "PhonePe Private Limited",
+    "jurisdiction": "India LEA Cell",
+    "name": "Ananya Mukherjee",
+    "designation": "Director - Trust & Safety LEA Relations",
+    "email": "law-enforcement@phonepe.com",
+    "phone": "+91-80-68727374",
+    "mobile": "+91-9900112233",
+    "address": "Office-2, Floor 4,5,6,7, Wing A, Block A, Salarpuria Softzone, Bellandur, Bengaluru",
+    "escalation_level": "Priority Cyber Fraud Escalation"
+  },
+  {
+    "id": "NOD-07",
+    "category": "Payment Gateway",
+    "organization": "National Payments Corporation of India (NPCI)",
+    "jurisdiction": "UPI / IMPS / AePS Architecture",
+    "name": "Deepak Sen",
+    "designation": "Senior Director - Risk Governance & Law Enforcement Response",
+    "email": "lea.support@npci.org.in",
+    "phone": "+91-22-40009100",
+    "mobile": "+91-9820129384",
+    "address": "1001A, The Capital, B Wing, 10th Floor, Bandra Kurla Complex, Mumbai",
+    "escalation_level": "Switch-level Transaction Trace"
+  }
+]

@@ -1,0 +1,135 @@
+{
+  "complaint_id": "NCRP-2026-DL-882190",
+  "victim": {
+    "name": "Dr. Ramesh Verma",
+    "phone": "+919811002233",
+    "district": "South West Delhi",
+    "loss_amount": 750000.00,
+    "reported_at": "2026-10-01 14:10:00",
+    "complaint_type": "FedEx / Digital Arrest Cyber Extortion"
+  },
+  "nodes": [
+    {
+      "id": "node-victim",
+      "type": "victim",
+      "label": "Complainant: Dr. Ramesh Verma",
+      "account": "SBI - 3918274619",
+      "bank": "State Bank of India",
+      "branch": "Hauz Khas, Delhi",
+      "layer": 0,
+      "frozen": false,
+      "balance": "₹42,000",
+      "loss": "₹7,50,000"
+    },
+    {
+      "id": "node-mule1",
+      "type": "mule_layer1",
+      "label": "Mule L1: Rohit Enterprise (A/C: 9810293847)",
+      "account": "HDFC - 9810293847",
+      "bank": "HDFC Bank",
+      "branch": "Connaught Place, Delhi",
+      "layer": 1,
+      "frozen": true,
+      "freeze_date": "2026-10-01 16:30",
+      "lien_amount": "₹1,50,000",
+      "pan": "BPLPS8819Q",
+      "phone": "+919876543210"
+    },
+    {
+      "id": "node-mule2a",
+      "type": "mule_layer2",
+      "label": "Mule L2-A: Amit Singh (UPI: amitsingh99@okaxis)",
+      "account": "Axis - 912010048172",
+      "bank": "Axis Bank",
+      "branch": "Noida Sector 18",
+      "layer": 2,
+      "frozen": true,
+      "freeze_date": "2026-10-01 18:45",
+      "lien_amount": "₹49,000",
+      "phone": "+919811223344"
+    },
+    {
+      "id": "node-mule2b",
+      "type": "mule_layer2",
+      "label": "Mule L2-B: Vikas Yadav (UPI: vikas.ydv@paytm)",
+      "account": "Paytm Bank - 9199281726",
+      "bank": "Paytm Payments Bank",
+      "branch": "Virtual Noida",
+      "layer": 2,
+      "frozen": false,
+      "lien_amount": "₹0 (Drained)",
+      "phone": "+919899887766"
+    },
+    {
+      "id": "node-mule3-crypto",
+      "type": "destination",
+      "label": "Crypto Merchant: Binance P2P / OTC Desk",
+      "account": "Wallet: 0x71C...8b21",
+      "bank": "Tether USDT Tron TRC-20",
+      "branch": "Decentralized P2P",
+      "layer": 3,
+      "frozen": false,
+      "lien_amount": "Offshore Flow",
+      "remarks": "Subpoena sent to Virtual Digital Asset Service Provider"
+    },
+    {
+      "id": "node-mule3-atm",
+      "type": "destination",
+      "label": "Physical ATM Withdrawal: South Ex Delhi",
+      "account": "ATM-HDFC-DEL-04",
+      "bank": "HDFC Cash Dispenser",
+      "branch": "South Extension Part 2",
+      "layer": 3,
+      "frozen": false,
+      "lien_amount": "Cash Extracted",
+      "remarks": "CCTV requisitioned from Bank Nodal Officer"
+    }
+  ],
+  "edges": [
+    {
+      "from": "node-victim",
+      "to": "node-mule1",
+      "amount": 750000.00,
+      "time": "2026-10-01 12:35",
+      "channel": "RTGS / NetBanking",
+      "txn_id": "RTGS20261001092837",
+      "status": "COMPLETED"
+    },
+    {
+      "from": "node-mule1",
+      "to": "node-mule2a",
+      "amount": 250000.00,
+      "time": "2026-10-01 13:05",
+      "channel": "IMPS",
+      "txn_id": "IMPS20261001428192",
+      "status": "FROZEN_ON_HOLD"
+    },
+    {
+      "from": "node-mule1",
+      "to": "node-mule2b",
+      "amount": 200000.00,
+      "time": "2026-10-01 13:12",
+      "channel": "UPI Multi-split",
+      "txn_id": "UPI20261001928371",
+      "status": "COMPLETED"
+    },
+    {
+      "from": "node-mule1",
+      "to": "node-mule3-atm",
+      "amount": 100000.00,
+      "time": "2026-10-01 13:45",
+      "channel": "ATM Cash Withdrawal",
+      "txn_id": "ATM20261001981029",
+      "status": "CASH_OUT"
+    },
+    {
+      "from": "node-mule2b",
+      "to": "node-mule3-crypto",
+      "amount": 195000.00,
+      "time": "2026-10-01 14:20",
+      "channel": "P2P Crypto Purchase (USDT)",
+      "txn_id": "P2P20261001827461",
+      "status": "CONVERTED_TO_CRYPTO"
+    }
+  ]
+}

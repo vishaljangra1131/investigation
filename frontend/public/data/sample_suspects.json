@@ -1,0 +1,83 @@
+[
+  {
+    "id": "SUS-2026-091",
+    "name": "Rohit Kumar Verma",
+    "alias": "Rocky / Masterji",
+    "father_name": "Satish Verma",
+    "dob": "1992-06-14",
+    "gender": "Male",
+    "role": "Syndicate Organizer & Mule Account Provider",
+    "primary_phone": "+919876543210",
+    "alternate_phones": ["+919811223344", "+919911002233"],
+    "imeis": ["864920048192831", "358291049281729"],
+    "aadhaar_masked": "XXXX-XXXX-8921",
+    "pan": "BPLPS8819Q",
+    "known_addresses": [
+      "H-42, Lajpat Nagar Part 2, New Delhi 110024",
+      "Flat 402, Tower B, Supertech Ecovillage, Greater Noida West"
+    ],
+    "associated_cases": ["FIR-DEL-2026-8812", "FIR-HR-2025-4102"],
+    "linked_accounts": [
+      { "bank": "HDFC Bank", "account": "9810293847", "branch": "Connaught Place", "status": "FROZEN" },
+      { "bank": "ICICI Bank", "account": "002918274619", "branch": "Lajpat Nagar", "status": "ACTIVE" }
+    ],
+    "linked_upis": ["rohit.rocky@okaxis", "bplps8819q@paytm"],
+    "threat_level": "HIGH",
+    "status": "UNDER_SURVEILLANCE",
+    "notes": "Suspect manages mule account procurement for international calling scam syndicate. Uses multiple burner SIM cards swapped across two dual-SIM handsets.",
+    "photo_placeholder": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": "SUS-2026-092",
+    "name": "Amit Kumar Singh",
+    "alias": "Bunty Tech",
+    "father_name": "R. P. Singh",
+    "dob": "1996-11-20",
+    "gender": "Male",
+    "role": "Layer 2 Runner & ATM Cash Dispenser",
+    "primary_phone": "+919811223344",
+    "alternate_phones": ["+919822334455"],
+    "imeis": ["867192039485721"],
+    "aadhaar_masked": "XXXX-XXXX-4412",
+    "pan": "CNVPS4910K",
+    "known_addresses": [
+      "Village Chhalera, Sector 44, Noida, Uttar Pradesh"
+    ],
+    "associated_cases": ["FIR-DEL-2026-8812"],
+    "linked_accounts": [
+      { "bank": "Axis Bank", "account": "912010048172", "branch": "Noida Sec 18", "status": "FROZEN" }
+    ],
+    "linked_upis": ["amitsingh99@okaxis"],
+    "threat_level": "MEDIUM",
+    "status": "DETAINED_FOR_QUESTIONING",
+    "notes": "Captured on ATM CCTV withdrawing cash using cloned debit card. Admits receiving 5% commission from Rohit Verma for cash routing.",
+    "photo_placeholder": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80"
+  },
+  {
+    "id": "SUS-2026-093",
+    "name": "Vikas Yadav",
+    "alias": "Vicky Hawala",
+    "father_name": "Dharmendra Yadav",
+    "dob": "1989-03-08",
+    "gender": "Male",
+    "role": "Cryptocurrency OTC P2P Converter",
+    "primary_phone": "+919899887766",
+    "alternate_phones": ["+919711223388"],
+    "imeis": ["354910293847561"],
+    "aadhaar_masked": "XXXX-XXXX-6109",
+    "pan": "AYRPY7729L",
+    "known_addresses": [
+      "K-Block, Mahipalpur Extension, New Delhi 110037"
+    ],
+    "associated_cases": ["FIR-DEL-2026-8812", "FIR-UP-2026-1049"],
+    "linked_accounts": [
+      { "bank": "Paytm Payments Bank", "account": "9199281726", "branch": "Virtual", "status": "CLOSED" },
+      { "bank": "Kotak Mahindra Bank", "account": "819201928374", "branch": "Surat", "status": "ACTIVE" }
+    ],
+    "linked_upis": ["vikas.ydv@paytm", "crypto.vikas@ibl"],
+    "threat_level": "CRITICAL",
+    "status": "ABSCONDING_LOOKOUT_ISSUED",
+    "notes": "Specializes in converting fraudulent Indian Rupee balances into offshore USDT Tether crypto assets via unregistered Telegram P2P escrow channels.",
+    "photo_placeholder": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80"
+  }
+]
