@@ -144,6 +144,20 @@ def load_demo(dataset: str = "case_1"):
         "validation": val_summary
     }
 
+@app.post("/api/reset")
+def reset_database():
+    """Clear all active CDR records, evidence, and reset database session"""
+    SESSION_DATA["records"] = []
+    SESSION_DATA["cleaned_records"] = []
+    SESSION_DATA["evidence"] = None
+    SESSION_DATA["audit_logs"].append({
+        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "action": "DATABASE_RESET",
+        "user": "Analyst",
+        "details": "User cleared all active CDR records and evidence"
+    })
+    return {"success": True, "message": "CDR database and uploaded records removed successfully"}
+
 @app.post("/api/upload")
 async def upload_file(file: UploadFile = File(...)):
     """Upload custom CDR file with cryptographic SHA-256 generation and column auto-detection"""

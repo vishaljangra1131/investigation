@@ -375,6 +375,34 @@ export const AppProvider = ({ children }) => {
     addNotification("Excel Dossier generated and downloaded successfully.");
   };
 
+  const resetDatabase = async () => {
+    setLoading(true);
+    try {
+      if (apiOnline) {
+        await fetch('/api/reset', { method: 'POST' });
+      }
+    } catch (e) {
+      console.warn("Backend reset error:", e);
+    } finally {
+      setRecords([]);
+      setSummary({
+        total_records: 0,
+        total_incoming: 0,
+        total_outgoing: 0,
+        unique_numbers: 0,
+        unique_imeis: 0,
+        total_duration: 0,
+        total_duration_formatted: "00h 00m",
+        peak_hour: "N/A",
+        peak_day: "N/A"
+      });
+      setEvidence(null);
+      setAnomalies([]);
+      setLoading(false);
+      addNotification("Database reset successful: All uploaded CDR records and forensic evidence removed.");
+    }
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -407,7 +435,8 @@ export const AppProvider = ({ children }) => {
         loadDemoData,
         formatNumber,
         downloadPdfReport,
-        downloadExcelReport
+        downloadExcelReport,
+        resetDatabase
       }}
     >
       {children}

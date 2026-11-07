@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
 import {
   Menu, Search, Bell, Shield, Eye, EyeOff, Moon, Sun, 
-  User, CheckCircle, Database, Download, RefreshCw
+  User, CheckCircle, Database, Download, RefreshCw, RotateCcw
 } from 'lucide-react';
 
 export default function Navbar({ onToggleSidebar }) {
   const { 
     caseData, theme, setTheme, maskNumbers, setMaskNumbers, 
     userRole, setUserRole, searchQuery, setSearchQuery, 
-    notifications, loadDemoData, loading, setCurrentView
+    notifications, loadDemoData, loading, setCurrentView,
+    resetDatabase, records
   } = useApp();
 
   const [showNotifications, setShowNotifications] = useState(false);
@@ -68,6 +69,21 @@ export default function Navbar({ onToggleSidebar }) {
         >
           <Database className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
           <span>Demo Data</span>
+        </button>
+
+        {/* Reset Database Quick Button */}
+        <button
+          onClick={() => {
+            if (window.confirm("Are you sure you want to remove all uploaded CDR records and reset the database?")) {
+              resetDatabase();
+            }
+          }}
+          disabled={loading || (records && records.length === 0)}
+          className="hidden md:flex items-center space-x-1.5 px-2.5 py-1.5 rounded-md bg-rose-950/40 hover:bg-rose-900/50 border border-rose-800/50 text-rose-400 hover:text-rose-300 text-xs font-medium transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+          title="Reset and clear current CDR database"
+        >
+          <RotateCcw className="w-3.5 h-3.5" />
+          <span>Reset</span>
         </button>
 
         {/* Mask Numbers Toggle (Privacy Guard) */}

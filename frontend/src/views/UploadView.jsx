@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
 import {
   Upload, FileText, CheckCircle, AlertCircle, Database, 
-  ArrowRight, RefreshCw, Hash, ShieldCheck, Filter, Table
+  ArrowRight, RefreshCw, Hash, ShieldCheck, Filter, Table,
+  Trash2, RotateCcw
 } from 'lucide-react';
 import Papa from 'papaparse';
 import * as XLSX from 'xlsx';
 
 export default function UploadView() {
-  const { setRecords, setEvidence, setSummary, addNotification, setCurrentView, loadDemoData, loading } = useApp();
+  const { records, evidence, setRecords, setEvidence, setSummary, addNotification, setCurrentView, loadDemoData, loading, resetDatabase } = useApp();
   const [dragOver, setDragOver] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -16,6 +17,20 @@ export default function UploadView() {
   const [detectedColumns, setDetectedColumns] = useState({});
   const [fileHash, setFileHash] = useState('');
   const [validationReport, setValidationReport] = useState(null);
+
+  const handleResetDatabase = () => {
+    if (window.confirm("Are you sure you want to remove all uploaded CDR files and reset the database?")) {
+      resetDatabase();
+      setSelectedFile(null);
+      setParsedPreview(null);
+      setValidationReport(null);
+      setDetectedColumns({});
+      setFileHash('');
+      setUploadProgress(0);
+      const fileInput = document.getElementById('cdr-file-input');
+      if (fileInput) fileInput.value = '';
+    }
+  };
 
   const calculateSHA256 = async (file) => {
     const buffer = await file.arrayBuffer();
@@ -131,15 +146,48 @@ export default function UploadView() {
 
   return (
     <div className="space-y-6 max-w-5xl mx-auto pb-12">
-      <div className="border-b border-slate-800 pb-3">
-        <h1 className="text-xl font-bold text-white flex items-center gap-2">
-          <Upload className="w-5 h-5 text-cyan-400" />
-          CDR File Ingestion & Data Normalization
-        </h1>
-        <p className="text-xs text-slate-400 mt-1">
-          Upload forensic Call Detail Records (CSV, XLS, XLSX, JSON, TXT). Automatically generates cryptographic SHA-256 evidence hash and identifies provider-specific column schemas.
-        </p>
+      <div className="border-b border-slate-800 pb-3 flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h1 className="text-xl font-bold text-white flex items-center gap-2">
+            <Upload className="w-5 h-5 text-cyan-400" />
+            CDR File Ingestion & Data Normalization
+          </h1>
+          <p className="text-xs text-slate-400 mt-1">
+            Upload forensic Call Detail Records (CSV, XLS, XLSX, JSON, TXT). Automatically generates cryptographic SHA-256 evidence hash and identifies provider-specific column schemas.
+          </p>
+        </div>
+
+        {/* Header Reset Option */}
+        <button
+          onClick={handleResetDatabase}
+          disabled={loading || (records.length === 0 && !selectedFile)}
+          className="px-3.5 py-2 rounded-lg bg-rose-950/40 hover:bg-rose-900/60 border border-rose-500/40 text-rose-300 font-semibold text-xs flex items-center gap-2 cursor-pointer transition-all disabled:opacity-40 disabled:cursor-not-allowed shadow-sm shadow-rose-950/40"
+          title="Remove uploaded CDR file and reset database"
+        >
+          <Trash2 className="w-4 h-4 text-rose-400" />
+          <span>Reset Database</span>
+        </button>
       </div>
+
+      {/* Active Database Status & Quick Reset Bar */}
+      {records.length > 0 && (
+        <div className="p-3.5 px-4 rounded-xl bg-slate-900/90 border border-cyan-500/30 flex flex-wrap items-center justify-between gap-2 shadow-lg">
+          <div className="flex items-center gap-2 text-xs">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span className="text-slate-300 font-semibold">Active Database:</span>
+            <span className="font-mono text-cyan-400 font-bold">{records.length} records</span>
+            <span className="text-slate-400 text-[11px]">({evidence?.original_filename || selectedFile?.name || 'Dataset Ingested'})</span>
+          </div>
+
+          <button
+            onClick={handleResetDatabase}
+            className="text-rose-400 hover:text-rose-300 font-mono text-xs font-semibold flex items-center gap-1.5 hover:underline cursor-pointer bg-rose-950/30 px-2.5 py-1 rounded border border-rose-500/30 transition-all"
+          >
+            <RotateCcw className="w-3.5 h-3.5" />
+            <span>Clear / Remove Database</span>
+          </button>
+        </div>
+      )}
 
       {/* Drag & Drop Zone */}
       <div
@@ -187,7 +235,7 @@ export default function UploadView() {
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <button
             onClick={() => loadDemoData('case_1')}
             disabled={loading}
@@ -203,6 +251,16 @@ export default function UploadView() {
             className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-mono text-xs font-semibold flex items-center gap-1.5 cursor-pointer"
           >
             <span>Load Demo Case 2</span>
+          </button>
+
+          <button
+            onClick={handleResetDatabase}
+            disabled={loading || (records.length === 0 && !selectedFile)}
+            className="px-3 py-1.5 rounded-lg bg-rose-950/40 hover:bg-rose-900/60 border border-rose-500/40 text-rose-300 font-mono text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+            title="Reset database and remove all loaded records"
+          >
+            <Trash2 className="w-3.5 h-3.5 text-rose-400" />
+            <span>Reset Database</span>
           </button>
         </div>
       </div>
@@ -291,7 +349,15 @@ export default function UploadView() {
             </div>
           )}
 
-          <div className="pt-2 flex justify-end">
+          <div className="pt-2 flex flex-wrap items-center justify-between gap-3">
+            <button
+              onClick={handleResetDatabase}
+              className="px-4 py-2.5 rounded-lg bg-rose-950/40 hover:bg-rose-900/60 border border-rose-500/40 text-rose-300 font-semibold text-xs flex items-center gap-2 cursor-pointer transition-all"
+            >
+              <Trash2 className="w-4 h-4 text-rose-400" />
+              <span>Remove File & Reset Database</span>
+            </button>
+
             <button
               onClick={finalizeIngestion}
               className="px-5 py-2.5 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold text-xs flex items-center gap-2 cursor-pointer shadow-lg shadow-cyan-500/20"

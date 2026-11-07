@@ -8,7 +8,7 @@ import {
 import StatCard from '../components/StatCard';
 
 export default function HomeView() {
-  const { setCurrentView, summary, records, loadDemoData } = useApp();
+  const { setCurrentView, summary, records, loadDemoData, resetDatabase } = useApp();
 
   return (
     <div className="space-y-10 max-w-7xl mx-auto pb-12">
@@ -92,21 +92,34 @@ export default function HomeView() {
               Real-time summary computed dynamically from active working records (Clearly labelled as fictional training dataset).
             </p>
           </div>
-          <button
-            onClick={() => loadDemoData('case_1')}
-            className="text-xs text-cyan-400 hover:text-cyan-300 font-mono underline"
-          >
-            Reload Case 1 Demo Data
-          </button>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => loadDemoData('case_1')}
+              className="text-xs text-cyan-400 hover:text-cyan-300 font-mono underline cursor-pointer"
+            >
+              Reload Case 1 Demo Data
+            </button>
+            <span className="text-slate-700">|</span>
+            <button
+              onClick={() => {
+                if (window.confirm("Are you sure you want to remove all CDR records and reset the database?")) {
+                  resetDatabase();
+                }
+              }}
+              className="text-xs text-rose-400 hover:text-rose-300 font-mono underline cursor-pointer"
+            >
+              Reset Database
+            </button>
+          </div>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-          <StatCard title="Total Records" value={summary?.total_records || records.length || 196} subtitle="CDR Transactions" color="cyan" />
-          <StatCard title="Incoming Calls" value={summary?.total_incoming || 68} subtitle="Mobile Terminated" color="emerald" />
-          <StatCard title="Outgoing Calls" value={summary?.total_outgoing || 88} subtitle="Mobile Originated" color="blue" />
-          <StatCard title="Unique Numbers" value={summary?.unique_numbers || 9} subtitle="Counterparty Nodes" color="purple" />
-          <StatCard title="Observed IMEIs" value={summary?.unique_imeis || 2} subtitle="Physical Handsets" color="amber" />
-          <StatCard title="Total Duration" value={summary?.total_duration_formatted || "08h 42m"} subtitle="Airtime Logged" color="rose" />
+          <StatCard title="Total Records" value={summary ? summary.total_records : records.length} subtitle="CDR Transactions" color="cyan" />
+          <StatCard title="Incoming Calls" value={summary ? summary.total_incoming : 0} subtitle="Mobile Terminated" color="emerald" />
+          <StatCard title="Outgoing Calls" value={summary ? summary.total_outgoing : 0} subtitle="Mobile Originated" color="blue" />
+          <StatCard title="Unique Numbers" value={summary ? summary.unique_numbers : 0} subtitle="Counterparty Nodes" color="purple" />
+          <StatCard title="Observed IMEIs" value={summary ? summary.unique_imeis : 0} subtitle="Physical Handsets" color="amber" />
+          <StatCard title="Total Duration" value={summary?.total_duration_formatted || "00h 00m"} subtitle="Airtime Logged" color="rose" />
         </div>
       </div>
 
