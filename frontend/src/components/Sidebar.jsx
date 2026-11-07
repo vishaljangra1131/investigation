@@ -7,7 +7,7 @@ import {
   ShieldCheck, FileText, BookOpen, GraduationCap, HelpCircle, Settings,
   Info, Shield, Scale, Mail, ChevronDown, ChevronRight, Menu, X,
   Landmark, Wallet, Search, Navigation, Download, Users, CreditCard,
-  Lock, Sparkles
+  Lock, Sparkles, Activity, ShieldAlert, Plus
 } from 'lucide-react';
 
 export default function Sidebar({ isOpen, setIsOpen }) {
@@ -26,7 +26,7 @@ export default function Sidebar({ isOpen, setIsOpen }) {
         { id: 'dashboard', label: 'Command Dashboard', icon: LayoutDashboard },
         { id: 'tools-directory', label: 'Tools Directory (36+)', icon: Sparkles, badge: 'All Tools', badgeColor: 'bg-cyan-500' },
         { id: 'case-management', label: 'Case Management (FIR)', icon: FolderPlus },
-        { id: 'new-investigation', label: 'New Investigation', icon: PlusIcon }
+        { id: 'new-investigation', label: 'New Investigation', icon: Plus }
       ]
     },
     {
@@ -220,13 +220,5 @@ export default function Sidebar({ isOpen, setIsOpen }) {
         </div>
       </aside>
     </>
-  );
-}
-
-function PlusIcon(props) {
-  return (
-    <svg fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-    </svg>
   );
 }

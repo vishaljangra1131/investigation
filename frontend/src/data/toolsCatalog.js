@@ -417,3 +417,4 @@ export const TOOLS_CATALOG = [
     tags: ['Pricing', 'Subscription', 'Department', 'Enterprise']
   }
 ];
+

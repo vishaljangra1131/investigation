@@ -326,3 +326,4 @@ export default function OfficerAuthView({ initialMode = 'login' }) {
     </div>
   );
 }
+
