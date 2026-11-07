@@ -146,17 +146,28 @@ def load_demo(dataset: str = "case_1"):
 
 @app.post("/api/reset")
 def reset_database():
-    """Clear all active CDR records, evidence, and reset database session"""
+    """Clear all active CDR records, evidence, and reset database session including case metadata"""
     SESSION_DATA["records"] = []
     SESSION_DATA["cleaned_records"] = []
     SESSION_DATA["evidence"] = None
+    SESSION_DATA["case"] = {
+        "case_id": "",
+        "case_title": "",
+        "officer_name": "",
+        "agency": "",
+        "description": "",
+        "created_at": "",
+        "status": "NO ACTIVE CASE",
+        "target_numbers": [],
+        "notes": []
+    }
     SESSION_DATA["audit_logs"].append({
         "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "action": "DATABASE_RESET",
         "user": "Analyst",
-        "details": "User cleared all active CDR records and evidence"
+        "details": "User cleared all active CDR records, evidence, and case details (Case No, Officer, Agency, Title, Brief)"
     })
-    return {"success": True, "message": "CDR database and uploaded records removed successfully"}
+    return {"success": True, "message": "CDR database, uploaded records, and case details removed successfully"}
 
 @app.post("/api/upload")
 async def upload_file(file: UploadFile = File(...)):

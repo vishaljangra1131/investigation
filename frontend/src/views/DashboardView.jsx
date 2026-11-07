@@ -40,13 +40,15 @@ export default function DashboardView() {
       <div className="p-5 rounded-2xl bg-gradient-to-r from-slate-900 via-slate-900 to-cyan-950/40 border border-slate-800 flex flex-wrap items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></span>
+            <span className={`w-2.5 h-2.5 rounded-full ${caseData?.case_id ? "bg-cyan-400 animate-pulse" : "bg-slate-500"}`}></span>
             <h1 className="text-lg font-bold text-white font-mono">
-              Investigation Dashboard: {caseData.case_id}
+              Investigation Dashboard: {caseData?.case_id || 'NO ACTIVE CASE'}
             </h1>
           </div>
           <p className="text-xs text-slate-400 mt-0.5">
-            {caseData.case_title} | Officer: {caseData.officer_name} ({caseData.agency})
+            {caseData?.case_title || 'No active investigation'} 
+            {caseData?.officer_name ? ` | Officer: ${caseData.officer_name}` : ''} 
+            {caseData?.agency ? ` (${caseData.agency})` : ''}
           </p>
         </div>
 

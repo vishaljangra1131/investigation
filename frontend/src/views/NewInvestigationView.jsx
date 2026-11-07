@@ -13,15 +13,16 @@ export default function NewInvestigationView() {
 
   const handleCaseSave = (e) => {
     e.preventDefault();
-    addNotification(`Investigation case "${caseData.case_id}" metadata saved.`);
+    addNotification(`Investigation case "${caseData.case_id || 'Draft'}" metadata saved.`);
     setCurrentView('dashboard');
   };
 
   const handleAddTarget = () => {
-    if (newTargetNum.trim() && !caseData.target_numbers.includes(newTargetNum.trim())) {
+    const list = caseData.target_numbers || [];
+    if (newTargetNum.trim() && !list.includes(newTargetNum.trim())) {
       setCaseData(prev => ({
         ...prev,
-        target_numbers: [...prev.target_numbers, newTargetNum.trim()]
+        target_numbers: [...(prev.target_numbers || []), newTargetNum.trim()]
       }));
       setNewTargetNum('');
       addNotification(`Added target number to case dossier.`);
@@ -61,8 +62,9 @@ export default function NewInvestigationView() {
               <label className="text-slate-400 block mb-1">CASE REFERENCE / FIR NUMBER</label>
               <input
                 type="text"
-                value={caseData.case_id}
+                value={caseData.case_id || ''}
                 onChange={(e) => setCaseData({ ...caseData, case_id: e.target.value })}
+                placeholder="e.g. FIR-DEL-2026-8812"
                 className="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-white font-bold text-xs focus:border-cyan-500 focus:outline-none"
                 required
               />
@@ -72,8 +74,9 @@ export default function NewInvestigationView() {
               <label className="text-slate-400 block mb-1">INVESTIGATION TITLE</label>
               <input
                 type="text"
-                value={caseData.case_title}
+                value={caseData.case_title || ''}
                 onChange={(e) => setCaseData({ ...caseData, case_title: e.target.value })}
+                placeholder="e.g. Operation CyberTrack: Telecom Intelligence Review"
                 className="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-white font-bold text-xs focus:border-cyan-500 focus:outline-none"
                 required
               />
@@ -83,8 +86,9 @@ export default function NewInvestigationView() {
               <label className="text-slate-400 block mb-1">INVESTIGATING OFFICER (IO) / EXAMINER</label>
               <input
                 type="text"
-                value={caseData.officer_name}
+                value={caseData.officer_name || ''}
                 onChange={(e) => setCaseData({ ...caseData, officer_name: e.target.value })}
+                placeholder="e.g. Constable Vishal"
                 className="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-white text-xs focus:border-cyan-500 focus:outline-none"
                 required
               />
@@ -94,8 +98,9 @@ export default function NewInvestigationView() {
               <label className="text-slate-400 block mb-1">LAW ENFORCEMENT DIVISION / AGENCY</label>
               <input
                 type="text"
-                value={caseData.agency}
+                value={caseData.agency || ''}
                 onChange={(e) => setCaseData({ ...caseData, agency: e.target.value })}
+                placeholder="e.g. Special Cyber Crime & Telecom Intelligence Division"
                 className="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-white text-xs focus:border-cyan-500 focus:outline-none"
                 required
               />
@@ -104,8 +109,9 @@ export default function NewInvestigationView() {
             <div className="md:col-span-2">
               <label className="text-slate-400 block mb-1">INVESTIGATION BRIEF / SCOPE</label>
               <textarea
-                value={caseData.description}
+                value={caseData.description || ''}
                 onChange={(e) => setCaseData({ ...caseData, description: e.target.value })}
+                placeholder="Enter case summary, suspected violations, IPC/BNS sections, and investigative scope..."
                 rows="3"
                 className="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-slate-200 text-xs focus:border-cyan-500 focus:outline-none leading-relaxed"
               />
@@ -121,11 +127,15 @@ export default function NewInvestigationView() {
           </h2>
 
           <div className="flex flex-wrap gap-2 items-center">
-            {caseData.target_numbers.map(num => (
-              <span key={num} className="px-3 py-1.5 rounded-lg bg-slate-950 border border-cyan-500/30 text-cyan-300 font-mono text-xs font-bold flex items-center gap-2">
-                {num}
-              </span>
-            ))}
+            {(caseData.target_numbers || []).length === 0 ? (
+              <span className="text-slate-500 font-mono text-xs italic">No suspect numbers tagged yet.</span>
+            ) : (
+              (caseData.target_numbers || []).map(num => (
+                <span key={num} className="px-3 py-1.5 rounded-lg bg-slate-950 border border-cyan-500/30 text-cyan-300 font-mono text-xs font-bold flex items-center gap-2">
+                  {num}
+                </span>
+              ))
+            )}
           </div>
 
           <div className="flex gap-2 max-w-sm pt-1">
@@ -155,15 +165,21 @@ export default function NewInvestigationView() {
           </h2>
 
           <div className="space-y-3">
-            {caseData.notes.map((note, idx) => (
-              <div key={idx} className="p-3 rounded-xl bg-slate-950/60 border border-slate-800 text-xs space-y-1">
-                <div className="flex items-center justify-between text-[10px] font-mono text-slate-400">
-                  <span>Author: <b className="text-white">{note.author}</b></span>
-                  <span>{note.date}</span>
-                </div>
-                <p className="text-slate-300 leading-relaxed font-sans">{note.text}</p>
+            {(caseData.notes || []).length === 0 ? (
+              <div className="p-3 text-slate-500 font-mono text-xs italic">
+                No diary entries recorded yet. Add observations below.
               </div>
-            ))}
+            ) : (
+              (caseData.notes || []).map((note, idx) => (
+                <div key={idx} className="p-3 rounded-xl bg-slate-950/60 border border-slate-800 text-xs space-y-1">
+                  <div className="flex items-center justify-between text-[10px] font-mono text-slate-400">
+                    <span>Author: <b className="text-white">{note.author}</b></span>
+                    <span>{note.date}</span>
+                  </div>
+                  <p className="text-slate-300 leading-relaxed font-sans">{note.text}</p>
+                </div>
+              ))
+            )}
           </div>
 
           <div className="flex gap-2 pt-2">

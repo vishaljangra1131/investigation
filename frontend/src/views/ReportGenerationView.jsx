@@ -61,7 +61,7 @@ export default function ReportGenerationView() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         <StatCard title="Analyzed Records" value={records.length} subtitle="Certified Count" color="cyan" />
         <StatCard title="Evidence Hash" value="SHA-256" subtitle="Cryptographically Verified" color="emerald" icon={ShieldCheck} />
-        <StatCard title="Target Numbers" value={caseData.target_numbers.length} subtitle="Tagged Entities" color="purple" />
+        <StatCard title="Target Numbers" value={(caseData.target_numbers || []).length} subtitle="Tagged Entities" color="purple" />
         <StatCard title="Statutory Standard" value="BSA SEC 63" subtitle="Admissible Format" color="amber" icon={Scale} />
       </div>
 
@@ -122,12 +122,12 @@ export default function ReportGenerationView() {
           </div>
 
           <p>
-            I, <b>{caseData.officer_name}</b>, presently posted at <b>{caseData.agency}</b>, do hereby certify as under:
+            I, <b>{caseData.officer_name || 'Investigating Officer'}</b>, presently posted at <b>{caseData.agency || 'Law Enforcement Agency'}</b>, do hereby certify as under:
           </p>
 
           <ol className="list-decimal list-inside space-y-2 text-[11px] text-slate-300 font-sans">
             <li>
-              That the Call Detail Records (CDR) referenced in Case <b>{caseData.case_id}</b> were lawfully obtained from cellular service providers and ingested into the computerized forensic workstation.
+              That the Call Detail Records (CDR) referenced in Case <b>{caseData.case_id || 'ACTIVE INVESTIGATION'}</b> were lawfully obtained from cellular service providers and ingested into the computerized forensic workstation.
             </li>
             <li>
               That the cryptographic SHA-256 hash was computed upon ingestion as <b>{evidence?.sha256_hash || 'E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855'}</b>, ensuring that no alteration, tampering, or data loss occurred.
@@ -143,9 +143,9 @@ export default function ReportGenerationView() {
               Place: New Delhi
             </div>
             <div className="text-right">
-              <b>{caseData.officer_name}</b><br/>
+              <b>{caseData.officer_name || 'Investigating Officer'}</b><br/>
               Digital Forensics & Telecom Examiner<br/>
-              {caseData.agency}
+              {caseData.agency || 'Law Enforcement Agency'}
             </div>
           </div>
         </div>

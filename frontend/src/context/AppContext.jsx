@@ -204,6 +204,34 @@ export const AppProvider = ({ children }) => {
               const mapped = res.data.map(r => ({ ...r, duration: Number(r.duration || 0) }));
               setRecords(mapped);
               computeLocalSummary(mapped);
+              setCaseData({
+                case_id: dataset === "case_1" ? "FIR-DEL-2026-8812" : "FIR-MUM-2026-4421",
+                case_title: dataset === "case_1" ? "Operation CyberTrack: Telecom Intelligence Review" : "SIM Box Interception & Hawala Network Investigation",
+                officer_name: "Constable Vishal",
+                agency: "Special Cyber Crime & Telecom Intelligence Division",
+                description: "Analysis of subscriber communications and mobile handset transitions in connection with suspected coordinated extortion & hawala operations.",
+                created_at: "2026-10-22 10:30:00",
+                status: "ACTIVE",
+                target_numbers: ["+919876543210", "+919811223344"],
+                notes: [
+                  { date: "2026-10-22 11:15", author: "Constable Vishal", text: "Subpoenaed CDR and IPDR logs received lawfully from cellular operators under Sec 91 CrPC / Sec 94 BNSS." },
+                  { date: "2026-10-24 16:40", author: "Sub-Insp. Priya Sharma", text: "Cryptographic SHA-256 integrity hash calculated and verified against raw disk image." }
+                ]
+              });
+              setEvidence({
+                evidence_id: dataset === "case_1" ? "EVD-2026-001" : "EVD-2026-002",
+                case_id: dataset === "case_1" ? "FIR-DEL-2026-8812" : "FIR-MUM-2026-4421",
+                original_filename: filename.split('/').pop(),
+                file_size_bytes: 42350,
+                sha256_hash: "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+                uploaded_at: "2026-10-22 10:35:00",
+                analyst_name: "Constable Vishal",
+                record_count: mapped.length,
+                verified: true,
+                custody_log: [
+                  { timestamp: "2026-10-22 10:35:00", action: "INITIAL_INGESTION", officer: "Constable Vishal", hash: "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855" }
+                ]
+              });
               addNotification(`Loaded local demo dataset (${dataset.toUpperCase()}).`);
             }
           });
@@ -259,7 +287,7 @@ export const AppProvider = ({ children }) => {
     <!DOCTYPE html>
     <html>
     <head>
-      <title>Judicial Forensic Dossier - ${caseData.case_id}</title>
+      <title>Judicial Forensic Dossier - ${caseData?.case_id || 'REPORT'}</title>
       <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; margin: 30px; color: #1e293b; background: white; }
         .header { border-bottom: 3px double #0f172a; padding-bottom: 15px; margin-bottom: 20px; }
@@ -292,10 +320,10 @@ export const AppProvider = ({ children }) => {
         </div>
       </div>
       <div class="meta-grid">
-        <div class="meta-item"><div class="meta-label">Case Reference</div><div class="meta-val">${caseData.case_id}</div></div>
-        <div class="meta-item"><div class="meta-label">Title</div><div class="meta-val">${caseData.case_title}</div></div>
-        <div class="meta-item"><div class="meta-label">Investigating Officer</div><div class="meta-val">${caseData.officer_name}</div></div>
-        <div class="meta-item"><div class="meta-label">Enforcement Division</div><div class="meta-val">${caseData.agency}</div></div>
+        <div class="meta-item"><div class="meta-label">Case Reference</div><div class="meta-val">${caseData?.case_id || 'NO ACTIVE CASE'}</div></div>
+        <div class="meta-item"><div class="meta-label">Title</div><div class="meta-val">${caseData?.case_title || 'N/A'}</div></div>
+        <div class="meta-item"><div class="meta-label">Investigating Officer</div><div class="meta-val">${caseData?.officer_name || 'Unassigned'}</div></div>
+        <div class="meta-item"><div class="meta-label">Enforcement Division</div><div class="meta-val">${caseData?.agency || 'N/A'}</div></div>
       </div>
       <div class="cert-box">
         <strong>CERTIFICATE UNDER SECTION 63 BHARATIYA SAKSHYA ADHINIYAM (BSA), 2023</strong><br/>
@@ -345,10 +373,10 @@ export const AppProvider = ({ children }) => {
     }
     const wb = XLSX.utils.book_new();
     const wsEvidence = XLSX.utils.json_to_sheet([
-      { Property: "Case ID", Value: caseData.case_id },
-      { Property: "Case Title", Value: caseData.case_title },
-      { Property: "Investigating Officer", Value: caseData.officer_name },
-      { Property: "Agency", Value: caseData.agency },
+      { Property: "Case ID", Value: caseData?.case_id || "N/A" },
+      { Property: "Case Title", Value: caseData?.case_title || "N/A" },
+      { Property: "Investigating Officer", Value: caseData?.officer_name || "Unassigned" },
+      { Property: "Agency", Value: caseData?.agency || "N/A" },
       { Property: "Evidence File", Value: evidence?.original_filename || "sample_cdr_case_01.csv" },
       { Property: "SHA-256 Hash", Value: evidence?.sha256_hash || "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855" },
       { Property: "Legal Compliance", Value: "Section 63 BSA 2023 / Section 65B IEA" }
@@ -398,8 +426,19 @@ export const AppProvider = ({ children }) => {
       });
       setEvidence(null);
       setAnomalies([]);
+      setCaseData({
+        case_id: "",
+        case_title: "",
+        officer_name: "",
+        agency: "",
+        description: "",
+        created_at: "",
+        status: "NO ACTIVE CASE",
+        target_numbers: [],
+        notes: []
+      });
       setLoading(false);
-      addNotification("Database reset successful: All uploaded CDR records and forensic evidence removed.");
+      addNotification("Database reset successful: All uploaded CDR records, forensic evidence, and case details removed.");
     }
   };
 

@@ -35,11 +35,13 @@ export default function Navbar({ onToggleSidebar }) {
         </button>
 
         <div className="hidden sm:flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-800 text-xs">
-          <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+          <span className={`w-2 h-2 rounded-full ${caseData?.case_id ? "bg-cyan-400 animate-pulse" : "bg-slate-500"}`}></span>
           <span className="text-slate-400 font-mono">CASE:</span>
-          <span className="font-bold text-white font-mono">{caseData.case_id}</span>
-          <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-semibold uppercase">
-            {caseData.status}
+          <span className="font-bold text-white font-mono">{caseData?.case_id || 'NO ACTIVE CASE'}</span>
+          <span className={`text-[10px] px-1.5 py-0.5 rounded font-semibold uppercase ${
+            caseData?.case_id ? "bg-emerald-500/20 text-emerald-400" : "bg-slate-800 text-slate-400"
+          }`}>
+            {caseData?.case_id ? (caseData?.status || 'ACTIVE') : 'UNASSIGNED'}
           </span>
         </div>
       </div>
@@ -74,13 +76,13 @@ export default function Navbar({ onToggleSidebar }) {
         {/* Reset Database Quick Button */}
         <button
           onClick={() => {
-            if (window.confirm("Are you sure you want to remove all uploaded CDR records and reset the database?")) {
+            if (window.confirm("Are you sure you want to reset? This will remove all uploaded CDR files, forensic evidence, and case details (Case No, Officer, Agency, Title, Brief).")) {
               resetDatabase();
             }
           }}
-          disabled={loading || (records && records.length === 0)}
+          disabled={loading || ((records && records.length === 0) && !caseData?.case_id)}
           className="hidden md:flex items-center space-x-1.5 px-2.5 py-1.5 rounded-md bg-rose-950/40 hover:bg-rose-900/50 border border-rose-800/50 text-rose-400 hover:text-rose-300 text-xs font-medium transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
-          title="Reset and clear current CDR database"
+          title="Reset and clear CDR database and case details"
         >
           <RotateCcw className="w-3.5 h-3.5" />
           <span>Reset</span>
@@ -137,10 +139,12 @@ export default function Navbar({ onToggleSidebar }) {
             className="flex items-center space-x-2 p-1.5 rounded-lg bg-slate-900 border border-slate-800 text-left hover:border-slate-700 transition-all"
           >
             <div className="w-7 h-7 rounded-md bg-gradient-to-tr from-cyan-600 to-indigo-600 flex items-center justify-center font-bold text-xs text-white">
-              {caseData.officer_name.charAt(0)}
+              {(caseData?.officer_name || '-').charAt(0).toUpperCase()}
             </div>
             <div className="hidden lg:block">
-              <div className="text-xs font-semibold text-slate-200 leading-tight">{caseData.officer_name}</div>
+              <div className="text-xs font-semibold text-slate-200 leading-tight">
+                {caseData?.officer_name || 'Unassigned Officer'}
+              </div>
               <div className="text-[10px] text-cyan-400 font-mono">{userRole}</div>
             </div>
           </button>
@@ -148,8 +152,8 @@ export default function Navbar({ onToggleSidebar }) {
           {showUserMenu && (
             <div className="absolute right-0 mt-2 w-56 bg-slate-900 border border-slate-800 rounded-xl shadow-2xl p-2 z-50 text-xs">
               <div className="px-2 py-1.5 border-b border-slate-800 mb-1">
-                <div className="font-semibold text-white">{caseData.officer_name}</div>
-                <div className="text-[10px] text-slate-400">{caseData.agency}</div>
+                <div className="font-semibold text-white">{caseData?.officer_name || 'Unassigned Officer'}</div>
+                <div className="text-[10px] text-slate-400">{caseData?.agency || 'No Agency Assigned'}</div>
               </div>
               <div className="py-1">
                 <div className="text-[10px] uppercase font-mono text-slate-500 px-2 py-1">Switch Role:</div>

@@ -102,7 +102,7 @@ export default function HomeView() {
             <span className="text-slate-700">|</span>
             <button
               onClick={() => {
-                if (window.confirm("Are you sure you want to remove all CDR records and reset the database?")) {
+                if (window.confirm("Are you sure you want to reset? This will remove all uploaded CDR files, forensic evidence, and case details (Case No, Officer, Agency, Title, Brief).")) {
                   resetDatabase();
                 }
               }}

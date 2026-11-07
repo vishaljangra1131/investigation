@@ -9,7 +9,7 @@ import Papa from 'papaparse';
 import * as XLSX from 'xlsx';
 
 export default function UploadView() {
-  const { records, evidence, setRecords, setEvidence, setSummary, addNotification, setCurrentView, loadDemoData, loading, resetDatabase } = useApp();
+  const { records, evidence, caseData, setRecords, setEvidence, setSummary, addNotification, setCurrentView, loadDemoData, loading, resetDatabase } = useApp();
   const [dragOver, setDragOver] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -19,7 +19,7 @@ export default function UploadView() {
   const [validationReport, setValidationReport] = useState(null);
 
   const handleResetDatabase = () => {
-    if (window.confirm("Are you sure you want to remove all uploaded CDR files and reset the database?")) {
+    if (window.confirm("Are you sure you want to reset? This will remove all uploaded CDR files, forensic evidence, and case details (Case No, Officer, Agency, Title, Brief).")) {
       resetDatabase();
       setSelectedFile(null);
       setParsedPreview(null);
@@ -160,9 +160,9 @@ export default function UploadView() {
         {/* Header Reset Option */}
         <button
           onClick={handleResetDatabase}
-          disabled={loading || (records.length === 0 && !selectedFile)}
+          disabled={loading || (records.length === 0 && !selectedFile && !caseData?.case_id)}
           className="px-3.5 py-2 rounded-lg bg-rose-950/40 hover:bg-rose-900/60 border border-rose-500/40 text-rose-300 font-semibold text-xs flex items-center gap-2 cursor-pointer transition-all disabled:opacity-40 disabled:cursor-not-allowed shadow-sm shadow-rose-950/40"
-          title="Remove uploaded CDR file and reset database"
+          title="Remove uploaded CDR file, clear case metadata, and reset database"
         >
           <Trash2 className="w-4 h-4 text-rose-400" />
           <span>Reset Database</span>
@@ -255,9 +255,9 @@ export default function UploadView() {
 
           <button
             onClick={handleResetDatabase}
-            disabled={loading || (records.length === 0 && !selectedFile)}
+            disabled={loading || (records.length === 0 && !selectedFile && !caseData?.case_id)}
             className="px-3 py-1.5 rounded-lg bg-rose-950/40 hover:bg-rose-900/60 border border-rose-500/40 text-rose-300 font-mono text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition-all disabled:opacity-40 disabled:cursor-not-allowed"
-            title="Reset database and remove all loaded records"
+            title="Reset database, clear case details, and remove all loaded records"
           >
             <Trash2 className="w-3.5 h-3.5 text-rose-400" />
             <span>Reset Database</span>
